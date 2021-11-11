@@ -1,0 +1,75 @@
+﻿@using IndustriellMaskinPark.Shared
+
+@if (ShowDialog)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleLabel">Add Maskin</h5>
+                <button type="button" class="close" @onclick="@Close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <EditForm Model="@Maskin" OnValidSubmit="@HandleValidSubmit">
+
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="form-group">
+                        <label for="lastName">Last name: </label>
+                        <input id="lastName" class="form-control" @bind="@Maskin.Namn" placeholder="Maskins namn">
+                        <ValidationMessage For="@(() => Maskin.Namn)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Namn">Maskins lägge: </label>
+                        <InputSelect @bind-Value=@Maskin.lagge>
+                            <option value="@(Start.på)">på</option>
+                            <option value="@(Start.av)">av</option>
+                            }
+                        </InputSelect> <ValidationMessage For="@(() => Maskin.lagge)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Stautus">Maskins status: </label>
+                        <InputSelect @bind-Value=@Maskin.MStatus>
+                            <option value="@(Status.Offline)">Offline</option>
+                            <option value="@(Status.Online)">Online</option>
+                            }
+                        </InputSelect> <ValidationMessage For="@(() => Maskin.MStatus)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Hastighet">Maskins lägge: </label>
+                        <InputSelect @bind-Value=@Maskin.MHastighet>
+                            <option value="@(Hastighet.low)">low</option>
+                            <option value="@(Hastighet.medium)">Medium</option>
+                            <option value="@(Hastighet.fast)">fast</option>
+                            }
+                        </InputSelect> <ValidationMessage For="@(() => Maskin.MHastighet)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MStatus">Makins komando: </label>
+                        <input id="email" class="form-control" @bind="@Maskin.Kommando" placeholder="Enter email">
+                        <ValidationMessage For="@(() => Maskin.Kommando)" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Data" class="col-sm-3">Data</label>
+                        <input id="Data" class="form-control" col-sm-8 @bind="@Maskin.Data" placeholder="Maskins Data">
+                        <ValidationMessage For="@(() => Maskin.Kommando)" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save maskin</button>
+                    <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                </EditForm>
+
+            </div>
+        </div>
+    </div>
+</div>
+}

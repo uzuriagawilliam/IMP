@@ -1,0 +1,43 @@
+﻿@page "/maskinersinfo"
+
+
+@if (Maskiner == null)
+{
+    <p> Loading... </p>
+}
+else
+{
+    <div>
+        <table>
+            @foreach (var item in Maskiner)
+            {
+                <tr class=" tr1">
+                    <td width="120px">Makins namn:</td>
+                    <td width="120px">@item.Namn</td>
+                    <td width="250px" px>Status: @item.MStatus</td>
+                </tr>
+
+                <tr class=" tr2">
+                    <td width="120px">Makins Id:</td>
+                    <td width="120px">@item.MaskinId</td>
+                    <td width="250px">Data: @item.Data</td>
+                    <td> <a href="@($"/kommando/{item.MaskinId}")" class="btn btn-secondary table-btn">Skicka kommando</a></td>
+                </tr>
+                <tr><td><br></td></tr>
+            }
+        </table>
+
+    </div>
+    <div>
+    <table>
+        <tr>
+            <td><a href="@($"/admaskin/")" class="btn btn-secondary table-btn">Ad maskin</a> </td>
+            <td><buttom @onclick="QuickAddMaskin" class="btn btn-secondary table-btn">Ad maskin</buttom>
+            @*<AddMaskinDialog @ref="AddMaskinDialog"> </AddMaskinDialog>*@
+    </td>
+        </tr>
+    </table>
+
+    </div>
+}
+

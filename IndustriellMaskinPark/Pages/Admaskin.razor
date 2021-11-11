@@ -1,0 +1,58 @@
+﻿@page "/admaskin"
+@using IndustriellMaskinPark.Shared;
+
+
+@if (!Saved)
+{
+
+    <section>
+        <EditForm Model="@Maskin" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+            <div class="form-group row">
+                <label for="Namn" class="col-sm-3">Namn</label>
+                <input id="Namn" class="form-control" col-sm-8 @bind-value="@Maskin.Namn" placeholder="Maskins namn">
+            </div>
+            <div class="form-group">
+                <label for="Namn">Maskins lägge: </label>
+                <InputSelect @bind-Value=@Maskin.lagge>
+                    <option value="@(Start.på)">på</option>
+                    <option value="@(Start.av)">av</option>
+                    }
+                </InputSelect> <ValidationMessage For="@(() => Maskin.lagge)" />
+            </div>
+
+            <div class="form-group">
+                <label for="Stautus">Maskins status: </label>
+                <InputSelect @bind-Value=@Maskin.MStatus>
+                    <option value="@(Status.Offline)">Offline</option>
+                    <option value="@(Status.Online)">Online</option>
+                    }
+                </InputSelect> <ValidationMessage For="@(() => Maskin.MStatus)" />
+            </div>
+
+            <div class="form-group">
+                <label for="Hastighet">Maskins lägge: </label>
+                <InputSelect @bind-Value=@Maskin.MHastighet>
+                    <option value="@(Hastighet.low)">low</option>
+                    <option value="@(Hastighet.medium)">Medium</option>
+                    <option value="@(Hastighet.fast)">fast</option>
+                    }
+                </InputSelect> <ValidationMessage For="@(() => Maskin.MHastighet)" />
+            </div>
+            <div class="form-group row">
+                <label for="Data" class="col-sm-3">Data</label>
+                <input id="Data" class="form-control" col-sm-8 @bind-value="@Maskin.Data" placeholder="Maskins Data">
+            </div>
+
+            <div class="form-group row">
+                <label for="Kommando" class="col-sm-3">Kommando</label>
+                <input id="Kommando" class="form-control" col-sm-8 @bind-value="@Maskin.Kommando" placeholder="Maskins kommando">
+            </div>
+            <button type="submit" class="btn-primary edit-btn">Ad maskin</button>
+        </EditForm>
+
+    </section>
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+}

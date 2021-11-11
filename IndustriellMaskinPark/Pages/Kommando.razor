@@ -1,0 +1,65 @@
+﻿@page "/kommando/{MaskinId:int}"
+
+@if (Maskin == null)
+{
+    <p> Loading... </p>
+}
+else
+{
+    <table>
+        <tr>
+            <td><strong>Maskins namn:</strong></td>
+            <td> @Maskin.Namn</td>
+        </tr>
+        <tr>
+            <td><strong>Data:</strong></td>
+            <td> @Maskin.Data</td>
+        </tr>
+        <tr>
+            <td><strong>Lägget:</strong></td>
+            <td>@Maskin.lagge</td>
+        </tr>
+        <tr>
+            <td><strong>Hastighet:</strong></td>
+            <td> @Maskin.MHastighet</td>
+        </tr>
+        <tr>
+            <td><strong>Status: </strong></td>
+            <td> @Maskin.MStatus</td>
+        </tr>
+    </table>
+    <br>
+    var tmp = @Maskin.lagge;
+
+    if (((int)tmp) == 1)
+    {
+        <input type="submit" class="btn btn-success" value="Starta Maskinen" @*@onclick="startamaskin" *@>
+        <br>
+    }
+    else
+    {
+        <input type="submit" class="btn btn-danger" value="Stäng av Maskinen" @*@onclick="stangamaskin" *@>
+        <br>
+        <br>
+        <h4>Hastighet: @Maskin.MHastighet</h4>
+        <label for="hastighet">Ändra hastighet (Låg Mellan Hög):</label>
+        <br>
+
+        <input type="range" id="hastighet" name="hastighet" min="1" max="3" step="1" @bind="@actualNumber"
+               @bind:event="oninput" />
+        <input type="submit" class="btn btn-danger" value="Ändra" @*@onclick="SetHastighet" *@>
+        <br>
+        <br>
+    }
+
+    <br>
+    <tabble>
+        <tr>
+            <td><label for="fname">Ny kommando:</label></td>
+            <td><input type="text" id="fname" name="fname" placeholder="Ny kommando"></td>
+        </tr>
+    </tabble>
+
+    <br>
+    <input type="submit" class="btn btn-info" value="Skicka kommando">
+}
